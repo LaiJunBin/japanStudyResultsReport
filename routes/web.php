@@ -12,3 +12,12 @@
 */
 
 Route::get('/',"MainController@index");
+
+Route::get('/login','MainController@login');
+Route::post('/login','MainController@loginProcess');
+
+Route::group(['prefix'=>'/user','middleware'=>['user.auth']],function(){
+    Route::get('/logout','UserController@logout');
+    Route::get('/updatePwd','UserController@updatePwd');
+    Route::put('/updatePwd','UserController@updatePwdProcess');
+});

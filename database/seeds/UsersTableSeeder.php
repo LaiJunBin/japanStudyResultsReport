@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'name' => $names[$i],
                 'user' => $users[$i],
-                'pwd' => $users[$i]
+                'pwd' => Hash::make($users[$i])
             ]);
         }
     }
