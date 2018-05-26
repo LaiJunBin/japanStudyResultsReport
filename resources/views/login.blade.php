@@ -85,6 +85,9 @@
             #captcha{
                 width:100%;
             }
+            aside{
+                margin-top:20px;
+            }
         </style>
     </form>
 </div>
