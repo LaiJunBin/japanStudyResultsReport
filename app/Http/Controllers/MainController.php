@@ -11,6 +11,7 @@ class MainController extends Controller
 {
     function index(){
         $binding = BindingService::binding();
+        $binding['images'] = glob('./images/*.jpg');
         return view('index',$binding);
     }
 

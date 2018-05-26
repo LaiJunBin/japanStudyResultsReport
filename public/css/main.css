@@ -26,3 +26,23 @@ article {
     width: 100%;
     margin: 10px 0;
 }
+
+#slideShow {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    margin: 10px 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+#slideShow img {
+    position: absolute;
+    width: 100%;
+    height: 40vh;
+    border-radius: 10px;
+}
+
+nav {
+    margin-bottom: 0 !important;
+}
