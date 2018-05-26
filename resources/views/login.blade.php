@@ -81,6 +81,11 @@
                     }
                 });
         </script>
+        <style>
+            #captcha{
+                width:100%;
+            }
+        </style>
     </form>
 </div>
     @include('components.aside')

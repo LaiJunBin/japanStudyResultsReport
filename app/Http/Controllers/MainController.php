@@ -13,7 +13,6 @@ class MainController extends Controller
     function index(){
         $binding = BindingService::binding();
         $binding['images'] = glob('./images/slideShow/*.jpg');
-        $binding['categories'] = Article::get()->pluck('category')->unique();
         $binding['articles'] = Article::get();
         //dd($binding);
         return view('index',$binding);

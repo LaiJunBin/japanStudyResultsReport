@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\User;
+use App\Article;
 
 class BindingService
 {
@@ -36,6 +37,7 @@ class BindingService
             ['url'=>'/photo/day/7','title'=>'第七天'],
             ['url'=>'/photo/day/8','title'=>'第八天'],
         ]]);
+        $binding['categories'] = Article::get()->pluck('category')->unique();
         return $binding;
     }
 }

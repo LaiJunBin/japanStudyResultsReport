@@ -53,7 +53,8 @@
                 $(this).addClass('active');
 
             });
-            $("[name=content]").html('{{ old('content') }}');
+            var data = `{!! old('content') !!}`;
+            $("[name=content]").html(data);
             CKEDITOR.replace('content');
 
             var uploadImage = setInterval(function(){

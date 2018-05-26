@@ -43,3 +43,8 @@
 @section('footer')
     @include('components.footer')
 @endsection
+<style>
+    aside{
+        margin-top:20px;
+    }
+</style>
