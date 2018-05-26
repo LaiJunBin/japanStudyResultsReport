@@ -30,5 +30,11 @@
         border: 0px;
         background-color: transparent;
         line-height:34px;
+        color:#333;
+        display:block;
+    }
+    .defaultBtn:hover{
+        text-decoration: none;
+        color:#333;
     }
 </style>

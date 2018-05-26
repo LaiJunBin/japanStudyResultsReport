@@ -1,7 +1,9 @@
 <article>
-    <header>
-        <a href="{{url('/article/add')}}" class="btn btn-info fill">新增文章</a>
-    </header>
+    @if (session()->has('name'))
+        <header>
+            <a href="{{url('/article/add')}}" class="btn btn-info fill">新增文章</a>
+        </header>
+    @endif
     <main>
         @forelse ($articles as $article)
             <div class="article">

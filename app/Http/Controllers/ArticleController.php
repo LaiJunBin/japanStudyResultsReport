@@ -76,7 +76,7 @@ class ArticleController extends Controller
             'category' =>$input['category'],
             'content'=>$input['content']
         ]);
-        return redirect('/');
+        return redirect('/'.$id);
     }
 
     function delete($id){
