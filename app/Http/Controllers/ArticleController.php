@@ -10,6 +10,13 @@ use Validator;
 
 class ArticleController extends Controller
 {
+    function viewArticle($id){
+        $binding = BindingService::binding();
+        $query = Article::where('id',$id)->first()->toarray();
+        $binding['article'] = $query;
+        $binding['categories'] = Article::get()->pluck('category')->unique();
+        return view('article.index',$binding);
+    }
     function add(){
         $binding = BindingService::binding();
         $binding['categories'] = Article::get()->pluck('category')->unique();
