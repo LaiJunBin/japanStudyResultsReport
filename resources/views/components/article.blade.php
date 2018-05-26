@@ -19,6 +19,9 @@
         @empty
             沒有任何文章
         @endforelse
+        <div id="pagination">
+            {{$articles->render()}}
+        </div>
     </main>
 </article>
 
@@ -40,5 +43,8 @@
     }
     .viewArticle{
         text-align:right;
+    }
+    #pagination{
+        text-align:center;
     }
 </style>

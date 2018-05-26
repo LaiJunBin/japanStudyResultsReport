@@ -1,5 +1,6 @@
 footer {
     text-align: center;
+
 }
 
 aside {
@@ -27,9 +28,10 @@ aside li {
 }
 
 article {
-    float: left;
+    /* float: left; */
+    display: inline-block;
     width: 65%;
-    height: 100vh;
+    min-height: 100vh;
     /* border: 1px solid #333; */
 }
 
@@ -61,4 +63,15 @@ article {
 
 nav {
     margin-bottom: 0 !important;
+}
+
+@media screen and (max-width: 900px){
+    aside,article{
+        width:100%;
+    }
+    aside{
+        float:none;
+        min-height: 0;
+        margin:0;
+    }
 }

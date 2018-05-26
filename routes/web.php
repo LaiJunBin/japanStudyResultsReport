@@ -16,6 +16,10 @@ Route::get('/',"MainController@index");
 Route::get('/login','MainController@login');
 Route::post('/login','MainController@loginProcess');
 
+Route::get('/search','MainController@search');
+Route::post('/search','MainController@searchProcess');
+
+
 Route::group(['prefix'=>'/user','middleware'=>['user.auth']],function(){
     Route::get('/logout','UserController@logout');
     Route::get('/updatePwd','UserController@updatePwd');
@@ -30,6 +34,7 @@ Route::group(['prefix'=>'/article','middleware'=>['user.auth']],function(){
     Route::delete('/delete/{id}','ArticleController@delete');
 
 });
+
 
 
 Route::get('/photo/day/{day}','MainController@photo_day');

@@ -6,8 +6,8 @@
 @endsection
 
 @section('content')
-    @include('components.article')
     @include('components.aside')
+    @include('components.article')
 @endsection
 
 @section('footer')

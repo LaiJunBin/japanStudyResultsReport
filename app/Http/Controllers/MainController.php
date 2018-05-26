@@ -11,9 +11,11 @@ use Hash;
 class MainController extends Controller
 {
     function index(){
+        if(session()->has('search'))
+            session()->forget('search');
         $binding = BindingService::binding();
         $binding['images'] = glob('./images/slideShow/*.jpg');
-        $binding['articles'] = Article::get();
+        $binding['articles'] = Article::paginate(5);
         //dd($binding);
         return view('index',$binding);
     }
@@ -48,5 +50,18 @@ class MainController extends Controller
             array_push($binding['images'],['url'=>$url,'height'=>$height]);
         }
         return view('photoDay',$binding);
+    }
+
+    function searchProcess(){
+        $input = request()->all();
+        session()->put('search',$input['search']);
+        return redirect('/search');
+    }
+
+    function search(){
+        $binding = BindingService::binding();
+        $binding['images'] = glob('./images/slideShow/*.jpg');
+        $binding['articles'] = Article::where('category',session('search'))->paginate(5);
+        return view('index',$binding);
     }
 }
