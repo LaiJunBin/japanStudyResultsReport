@@ -68,10 +68,10 @@ nav {
 @media screen and (max-width: 900px){
     aside,article{
         width:100%;
+        min-height: 0;
     }
     aside{
         float:none;
-        min-height: 0;
         margin:0;
     }
 }
