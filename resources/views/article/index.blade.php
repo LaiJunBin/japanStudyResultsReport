@@ -53,4 +53,9 @@
     aside{
         margin-top:40px;
     }
+    @media screen and (max-width: 768px){
+        aside{
+            display:none !important;
+        }
+    }
 </style>
