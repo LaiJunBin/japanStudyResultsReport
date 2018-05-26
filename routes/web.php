@@ -21,3 +21,5 @@ Route::group(['prefix'=>'/user','middleware'=>['user.auth']],function(){
     Route::get('/updatePwd','UserController@updatePwd');
     Route::put('/updatePwd','UserController@updatePwdProcess');
 });
+
+Route::get('/photo/day/{day}','MainController@photo_day');

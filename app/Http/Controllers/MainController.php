@@ -11,7 +11,7 @@ class MainController extends Controller
 {
     function index(){
         $binding = BindingService::binding();
-        $binding['images'] = glob('./images/*.jpg');
+        $binding['images'] = glob('./images/slideShow/*.jpg');
         return view('index',$binding);
     }
 
@@ -32,5 +32,18 @@ class MainController extends Controller
             session()->put('name',$query->name);
             return redirect('/');
         }
+    }
+
+    function photo_day($day){
+        $binding = BindingService::binding();
+        $binding['images'] = [];
+        $images = glob('./images/day/'.$day.'/*.jpg');
+        for($i = 0;$i<count($images);$i++){
+            $url = $images[$i];
+            $img = getimagesize($url);
+            $height = $img[1] / ($img[0]/340);
+            array_push($binding['images'],['url'=>$url,'height'=>$height]);
+        }
+        return view('photoDay',$binding);
     }
 }
