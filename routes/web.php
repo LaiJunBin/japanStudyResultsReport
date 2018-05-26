@@ -22,4 +22,14 @@ Route::group(['prefix'=>'/user','middleware'=>['user.auth']],function(){
     Route::put('/updatePwd','UserController@updatePwdProcess');
 });
 
+Route::group(['prefix'=>'/article','middleware'=>['user.auth']],function(){
+    Route::get('/add','ArticleController@add');
+    Route::post('/add','ArticleController@addProcess');
+    Route::get('/update/{id}','ArticleController@update');
+    Route::put('/update/{id}','ArticleController@updateProcess');
+    Route::delete('/delete/{id}','ArticleController@delete');
+
+});
+
+
 Route::get('/photo/day/{day}','MainController@photo_day');

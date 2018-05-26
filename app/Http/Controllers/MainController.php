@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\BindingService;
 use App\User;
+use App\Article;
 use Hash;
 
 class MainController extends Controller
@@ -12,6 +13,9 @@ class MainController extends Controller
     function index(){
         $binding = BindingService::binding();
         $binding['images'] = glob('./images/slideShow/*.jpg');
+        $binding['categories'] = Article::get()->pluck('category')->unique();
+        $binding['articles'] = Article::get();
+        //dd($binding);
         return view('index',$binding);
     }
 
