@@ -14,6 +14,7 @@ class ArticleController extends Controller
         $binding = BindingService::binding();
         $query = Article::where('id',$id)->first()->toarray();
         $binding['article'] = $query;
+        $binding['manageable'] = $query['name'] == session('name')??null;
         return view('article.index',$binding);
     }
     function add(){
@@ -33,7 +34,7 @@ class ArticleController extends Controller
             ],
         ];
 
-        if(($input['different']??"") == $input['category']){
+        if('沒有分類' == $input['category']){
             return redirect('/article/add')->withErrors('必須選擇類別')->withInput();
         }
         $validator = Validator::make($input,$rules);
@@ -43,6 +44,43 @@ class ArticleController extends Controller
 
         $input['name'] = session('name');
         Article::create($input);
+        return redirect('/');
+    }
+
+    function update($id){
+        $binding = BindingService::binding();
+        $binding['article'] = Article::where('id',$id)->first()->toarray();
+        return view('article.update',$binding);
+    }
+
+    function updateProcess($id){
+        $input = request()->all();
+        $rules = [
+            'category'=>[
+                'required',
+                'min:1',
+            ],
+            'content'=>[
+                'required',
+            ],
+        ];
+
+        $validator = Validator::make($input,$rules);
+        if($validator->fails()){
+            return redirect('/article/update/'.$id)->withErrors($validator)->withInput();
+        }
+
+
+        Article::where('id',$id)->update([
+            'title' =>$input['title'],
+            'category' =>$input['category'],
+            'content'=>$input['content']
+        ]);
+        return redirect('/');
+    }
+
+    function delete($id){
+        Article::where('id',$id)->delete();
         return redirect('/');
     }
 }
