@@ -34,7 +34,7 @@ class BindingService
             'enterprise'=>'企業參訪見學',
             'farmhouse'=>'農家寄宿體驗',
         ];
-        $index = count($binding)-1;
+        $index = count($binding['dropMenu'])-1;
         $binding['categories'] = Article::whereNotIn('category',$fileTitle)->get()->pluck('category')->unique()->toarray();
         // dd($binding);
         foreach(glob('./images/category/*') as $dir){
