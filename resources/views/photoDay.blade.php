@@ -2,6 +2,7 @@
 @section('title',"106金手獎赴日技職研習成果網站")
 @section('header')
     @include('components.navbar')
+    <div class="alert alert-warning" role="alert" style="text-align:center;">拖曳圖片至此頁面可上傳圖片</div>
 @endsection
 
 
@@ -54,6 +55,29 @@
         cursor: pointer;
         transform: scale(1.2);
     }
+
+    .container{
+        position: relative;
+        min-height: 100vh;
+        z-index: 99;
+    }
+
+    #upload{
+        width: calc(100% - 15px *2);
+        height: calc(100vh - 100px);
+        position:absolute;
+        top:100px;
+        left:15px;
+        text-align:center;
+        line-height:calc(100vh - 100px);
+        font-size:24px;
+        background:rgba(51,153,255,.4);
+        z-index:9;
+        opacity: 0;
+        transition:opacity .5s;
+        color:chocolate;
+    }
+
 </style>
 
 
@@ -68,6 +92,7 @@
 
 
 @section('content')
+<div id="upload">拖曳圖片到這裡將立即上傳圖片</div>
 <ul class="nav" id="myUl">
 
 </ul>
@@ -81,12 +106,22 @@
             });
         };
 
-        $("html,body")[0].ondragover = function () {
+        $(".container")[0].ondragenter = function () {
+            $("#upload").css('opacity',1);
+        }
+
+        $(".container").bind('dragleave dragend',function () {
+            $("#upload").css('opacity',0);
+        });
+
+        $(".container")[0].ondragover = function () {
+            $("#upload").css('opacity',1);
             return false;
         }
 
-        $("html,body")[0].ondrop = function (e) {
+        $(".container")[0].ondrop = function (e) {
             e.preventDefault();
+            $("#upload").css('opacity',0);
             if(e.dataTransfer.files.length>0){
                 var filereader = new FileReader();
 
