@@ -19,7 +19,8 @@
                 </div>
             </div>
         @empty
-            沒有任何文章
+
+            <div class="alert alert-danger" role="alert" style="text-align:center;">沒有任何文章</div>
         @endforelse
         <div id="pagination">
             {{$articles->render()}}
