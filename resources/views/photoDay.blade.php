@@ -189,10 +189,17 @@
                                     url:'.'+images[key].url
                                 },
                                 success:function(res){
-                                    images.removeAt(key);
+                                    images = images.removeAt(key);
                                     obj.parent().remove();
-                                    fullImage();
-                                    layout();
+                                    if(images.length>0){
+                                        fullImage();
+                                        layout();
+                                        $(".removeIcon").each(function(){
+                                            var va = $(this).attr('va');
+                                            if(va > key)
+                                                $(this).attr('va',va - 1);
+                                        });
+                                    }
                                 }
                             });
                         }
