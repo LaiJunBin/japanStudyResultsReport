@@ -9,11 +9,11 @@
             $name = 1;
 
 
-            foreach(glob('../images/day/'.$_POST['day'].'/*') as $fileName){
+            foreach(glob('../images/category/'.$_POST['category'].'/*') as $fileName){
                 $data = array_reverse(mb_split('/',$fileName))[0];
                 $name = max(explode('.',$data),$name);
             }
-            $file = '../images/day/'.$_POST['day'].'/'.($name[0]+1).'.'.$type;
+            $file = '../images/category/'.$_POST['category'].'/'.($name[0]+1).'.'.$type;
 
             move_uploaded_file($temp,$file);
 

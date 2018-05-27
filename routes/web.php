@@ -35,6 +35,6 @@ Route::group(['prefix'=>'/article','middleware'=>['user.auth']],function(){
 
 });
 
-Route::get('/photo/day/{day}','MainController@photo_day');
+Route::get('/photo/category/{category}','MainController@photo_category');
 Route::get('/{id}','ArticleController@viewArticle');
 

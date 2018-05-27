@@ -13,6 +13,8 @@
 
 
 
+
+
 <style>
     #myUl {
         position: relative;
@@ -38,7 +40,8 @@
         margin-top: 15px;
         line-height: 0px;
     }
-    .removeIcon{
+
+    .removeIcon {
 
         color: #ccc;
         z-index: 9;
@@ -47,11 +50,13 @@
         top: 20px !important;
     }
 
-    .removeIcon:hover{
-        cursor:pointer;
-        transform:scale(1.2);
+    .removeIcon:hover {
+        cursor: pointer;
+        transform: scale(1.2);
     }
 </style>
+
+
 
 
 
@@ -67,8 +72,7 @@
 
 </ul>
 <script>
-
-     @if (session()->has('name'))
+    @if (session()->has('name'))
 
 
         Array.prototype.removeAt = function (key) {
@@ -85,42 +89,38 @@
             e.preventDefault();
             if(e.dataTransfer.files.length>0){
                 var filereader = new FileReader();
-                var formdata = new FormData();
-                var size = 0;
+
                 for (var image of e.dataTransfer.files) {
                     if(image.type.indexOf('image')!=-1){
-                        size += image.size;
-                        if(size>=8388608){
-                            alert('圖片總大小過大，建議不要超過8MB!');
-                            return false;
-                        }
+                        var formdata = new FormData();
                         formdata.append('images[]', image);
+                        formdata.append('category','{{$category}}');
+                        $.ajax({
+                            url: '{{ url('') }}'+'/ajax/uploadImage.php',
+                            data: formdata,
+                            method: "POST",
+                            dataType: 'JSON',
+                            contentType: false,
+                            processData: false,
+                            success: function (res) {
+                                res.forEach(function(x){
+                                    x.url = x.url.substr(1);
+                                    images.unshift(x);
+                                })
+                                $("#myUl").empty();
+                                page = 1;
+                                render();
+                                document.body.scrollTop=0;
 
+                            },
+                            error:function(err){
+                                alert('圖片上傳失敗，圖片名稱'+image.name);
+                            }
+                        });
                     }
                 }
-                formdata.append('day',{{$day}})
-                $.ajax({
-                    url: '{{ url('') }}'+'/ajax/uploadImage.php',
-                    data: formdata,
-                    method: "POST",
-                    dataType: 'JSON',
-                    contentType: false,
-                    processData: false,
-                    success: function (res) {
-                        res.forEach(function(x){
-                            x.url = x.url.substr(1);
-                            images.unshift(x);
-                        })
-                        $("#myUl").empty();
-                        page = 1;
-                        render();
-                        document.body.scrollTop=0;
 
-                    },
-                    error:function(err){
-                        alert('圖片總大小過大，建議不要超過8MB!');
-                    }
-                });
+
             }
         }
     @endif
@@ -259,5 +259,6 @@
 
         //DOM讀取完先取一次資料
         render();
+
 </script>
 @endsection

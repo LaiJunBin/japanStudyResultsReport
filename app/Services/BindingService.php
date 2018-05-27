@@ -26,18 +26,24 @@ class BindingService
                 ]
             ];
         }
-        array_push($binding['dropMenu'],
-        ['title'=>'相片瀏覽','subMenu'=>[
-            ['url'=>url('/photo/day/1'),'title'=>'第一天'],
-            ['url'=>url('/photo/day/2'),'title'=>'第二天'],
-            ['url'=>url('/photo/day/3'),'title'=>'第三天'],
-            ['url'=>url('/photo/day/4'),'title'=>'第四天'],
-            ['url'=>url('/photo/day/5'),'title'=>'第五天'],
-            ['url'=>url('/photo/day/6'),'title'=>'第六天'],
-            ['url'=>url('/photo/day/7'),'title'=>'第七天'],
-            ['url'=>url('/photo/day/8'),'title'=>'第八天'],
-        ]]);
-        $binding['categories'] = Article::get()->pluck('category')->unique();
+        array_push($binding['dropMenu'],['title'=>'相片瀏覽','subMenu'=>[]]);
+        $fileTitle = [
+            'culture'=>'日本文化體驗',
+            'University'=>'大學及農業試驗所參訪見學',
+            'communicate'=>'日本高校交流',
+            'enterprise'=>'企業參訪見學',
+            'farmhouse'=>'農家寄宿體驗',
+        ];
+        $index = count($binding)-1;
+        $binding['categories'] = Article::whereNotIn('category',$fileTitle)->get()->pluck('category')->unique()->toarray();
+        // dd($binding);
+        foreach(glob('./images/category/*') as $dir){
+            $file = array_reverse(explode('/',$dir))[0];
+            array_push($binding['dropMenu'][$index]['subMenu'],['url'=>url('/photo/category/'.$file),'title'=>$fileTitle[$file]]);
+            array_unshift($binding['categories'],$fileTitle[$file]);
+        }
+
+
         return $binding;
     }
 }

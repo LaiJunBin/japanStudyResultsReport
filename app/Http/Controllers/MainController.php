@@ -39,11 +39,11 @@ class MainController extends Controller
         }
     }
 
-    function photo_day($day){
+    function photo_category($category){
         $binding = BindingService::binding();
         $binding['images'] = [];
-        $binding['day'] = $day;
-        $images = array_reverse(glob('./images/day/'.$day.'/*'));
+        $binding['category'] = $category;
+        $images = array_reverse(glob('./images/category/'.$category.'/*'));
         for($i = 0;$i<count($images);$i++){
             $url = $images[$i];
             $img = getimagesize($url);
