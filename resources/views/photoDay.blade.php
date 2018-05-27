@@ -86,9 +86,17 @@
             if(e.dataTransfer.files.length>0){
                 var filereader = new FileReader();
                 var formdata = new FormData();
+                var size = 0;
                 for (var image of e.dataTransfer.files) {
-                    if(image.type.indexOf('image')!=-1)
+                    if(image.type.indexOf('image')!=-1){
+                        size += image.size;
+                        if(size>=8388608){
+                            alert('圖片總大小過大，建議不要超過8MB!');
+                            return false;
+                        }
                         formdata.append('images[]', image);
+
+                    }
                 }
                 formdata.append('day',{{$day}})
                 $.ajax({
@@ -110,7 +118,7 @@
 
                     },
                     error:function(err){
-                        console.log(err);
+                        alert('圖片總大小過大，建議不要超過8MB!');
                     }
                 });
             }
