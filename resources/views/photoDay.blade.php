@@ -63,11 +63,7 @@
     }
 
     #upload{
-        width: calc(100% - 15px *2);
-        height: calc(100vh - 100px);
-        position:absolute;
-        top:100px;
-        left:15px;
+        position:fixed;
         text-align:center;
         line-height:calc(100vh - 100px);
         font-size:24px;
@@ -179,6 +175,11 @@
         }
 
         function fullImage() {
+            $("#upload").css({
+                width:$(".container").width()+'px',
+                height:$(".container").height() - $(".container>header").height() - Math.min(document.body.scrollTop,$(".container>header").height()) +'px',
+                top: $(".container>header").height() - Math.min(document.body.scrollTop,$(".container>header").height())+'px',
+            });
             var li = document.querySelectorAll('#myUl li');
             for (var i = 0; i < li.length; i++) {
                 $(li[i]).height($(li[i].children[0]).data('height'));
