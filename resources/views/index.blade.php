@@ -8,6 +8,14 @@
 @section('content')
     @include('components.aside')
     @include('components.article')
+    <style>
+        @media screen and (max-width: 768px) {
+            aside {
+                display: unset;
+            }
+        }
+
+    </style>
 @endsection
 
 @section('footer')

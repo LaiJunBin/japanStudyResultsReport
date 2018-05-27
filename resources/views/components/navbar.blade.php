@@ -20,7 +20,7 @@
                         @foreach ($menu['subMenu'] as $subMenu) @if ($subMenu == 'divider')
                         <li class="divider"></li>
                         @else
-                        <li><a href="{{$subMenu['url']}}">{{$subMenu['title']}}</a></li>
+                        <li><a class="btn btn-sm" href="{{$subMenu['url']}}">{{$subMenu['title']}}</a></li>
                         @endif @endforeach
                     </ul>
                 </li>
@@ -29,7 +29,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-@yield('navbarAlign','right')">
                 @foreach ($navMenu as $menu)
-                <li><a href="{{$menu['url']}}">{{$menu['title']}}</a></li>
+                <li><a class="btn btn-sm" href="{{$menu['url']}}">{{$menu['title']}}</a></li>
                 @endforeach
             </ul>
         </div>

@@ -1,6 +1,6 @@
 footer {
     text-align: center;
-
+    margin-top:5px;
 }
 
 aside {
@@ -35,6 +35,8 @@ article {
     /* border: 1px solid #333; */
 }
 
+
+
 .left {
     float: left;
     width: 65%;
@@ -61,17 +63,20 @@ article {
     border-radius: 10px;
 }
 
+
 nav {
     margin-bottom: 0 !important;
 }
 
-@media screen and (max-width: 768px){
-    aside,article{
-        width:100%;
+@media screen and (max-width: 768px) {
+    aside,
+    article,
+    .left {
+        width: 100%;
         min-height: 0;
     }
-    aside{
-        float:none;
-        margin:0;
+    aside {
+        display: none;
+        margin: 0;
     }
 }
