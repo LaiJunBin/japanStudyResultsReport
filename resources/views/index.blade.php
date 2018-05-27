@@ -13,3 +13,4 @@
 @section('footer')
     @include('components.footer')
 @endsection
+

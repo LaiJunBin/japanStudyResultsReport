@@ -11,9 +11,9 @@ class BindingService
             $binding = [
                 'dropMenu' => [
                     ['title'=>'使用者：'.session('name'),'subMenu'=>[
-                        ['url'=>'/user/updatePwd','title'=>'修改密碼'],
+                        ['url'=>url('/user/updatePwd'),'title'=>'修改密碼'],
                         'divider',
-                        ['url'=>'/user/logout','title'=>'登出'],
+                        ['url'=>url('/user/logout'),'title'=>'登出'],
                     ]],
                 ],
                 'navMenu'=>[],
@@ -22,7 +22,7 @@ class BindingService
             $binding = [
                 'dropMenu' =>[],
                 'navMenu' => [
-                    ['url'=>'login','title'=>'登入'],
+                    ['url'=>url('/login'),'title'=>'登入'],
                 ]
             ];
         }

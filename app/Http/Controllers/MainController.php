@@ -42,13 +42,15 @@ class MainController extends Controller
     function photo_day($day){
         $binding = BindingService::binding();
         $binding['images'] = [];
-        $images = glob('./images/day/'.$day.'/*.jpg');
+        $binding['day'] = $day;
+        $images = array_reverse(glob('./images/day/'.$day.'/*'));
         for($i = 0;$i<count($images);$i++){
             $url = $images[$i];
             $img = getimagesize($url);
             $height = $img[1] / ($img[0]/340);
             array_push($binding['images'],['url'=>$url,'height'=>$height]);
         }
+
         return view('photoDay',$binding);
     }
 
