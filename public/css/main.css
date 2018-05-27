@@ -1,6 +1,6 @@
 footer {
     text-align: center;
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 aside {
@@ -35,8 +35,6 @@ article {
     /* border: 1px solid #333; */
 }
 
-
-
 .left {
     float: left;
     width: 65%;
@@ -62,7 +60,6 @@ article {
     height: 40vh;
     border-radius: 10px;
 }
-
 
 nav {
     margin-bottom: 0 !important;

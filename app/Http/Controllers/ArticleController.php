@@ -12,8 +12,10 @@ class ArticleController extends Controller
 {
     function viewArticle($id){
         $binding = BindingService::binding();
-        $query = Article::where('id',$id)->first()->toarray();
-        $binding['article'] = $query;
+        $query = Article::where('id',$id)->first();
+        if($query == null)
+            return redirect('/');
+        $binding['article'] = $query->toarray();
         $binding['manageable'] = $query['name'] == session('name')??null;
         return view('article.index',$binding);
     }

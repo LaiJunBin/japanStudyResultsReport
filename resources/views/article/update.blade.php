@@ -44,7 +44,7 @@
 
     <label for="content">內文：</label>
     <textarea name="content" id="content"></textarea>
-    <button type="submit" class="btn btn-success fill">新增文章</button>
+    <button type="submit" class="btn btn-success fill">編輯文章</button>
     <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
     <script>
         $(".categoryBtn").click(function(){
