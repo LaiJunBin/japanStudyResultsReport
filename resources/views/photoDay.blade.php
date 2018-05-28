@@ -2,9 +2,10 @@
 @section('title',"106金手獎赴日技職研習成果網站")
 @section('header')
     @include('components.navbar')
-    <div class="alert alert-warning" role="alert" style="text-align:center;" id="fileOpen">點我或拖曳圖片至此頁面可上傳圖片</div>
-    <input type="file" multiple id="file" style="display:none;">
+<div class="alert alert-warning" role="alert" style="text-align:center;" id="fileOpen">點我或拖曳圖片至此頁面可上傳圖片</div>
+<input type="file" multiple id="file" style="display:none;">
 @endsection
+
 
 
 
@@ -57,38 +58,47 @@
         transform: scale(1.2);
     }
 
-    .container{
+    .container {
         position: relative;
         min-height: 100vh;
         z-index: 99;
     }
 
-    #upload{
-        position:fixed;
-        text-align:center;
-        line-height:calc(100vh - 100px);
-        font-size:24px;
-        background:rgba(51,153,255,.4);
-        z-index:9;
+    #upload {
+        position: fixed;
+        text-align: center;
+        line-height: calc(100vh - 100px);
+        font-size: 24px;
+        background: rgba(51, 153, 255, .4);
+        z-index: 9;
         opacity: 0;
-        transition:opacity .5s;
-        color:chocolate;
+        transition: opacity .5s;
+        color: chocolate;
     }
 
+    #uploadProgress {
+        display: none;
+    }
 </style>
+
 
 
 @section('content')
 <div id="upload">
-	拖曳圖片到這裡將立即上傳圖片
+    拖曳圖片到這裡將立即上傳圖片
 
+</div>
+<div class="progress" id="uploadProgress">
+    <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+        aria-valuemax="0">
+
+    </div>
 </div>
 <ul class="nav" id="myUl">
 
 </ul>
 <script>
-
-	$(".container")[0].ondragenter = function () {
+    $(".container")[0].ondragenter = function () {
 		$("#upload").css('opacity',1);
 	}
 
@@ -125,7 +135,20 @@
         }
 
         function fileUpload(files,index=0){
+            if(index == 0){
+                $("#uploadProgress>div").attr('aria-valuemax',files.length).parent().show();
+            }else{
+                var width = $("#uploadProgress").width();
+                $("#uploadProgress>div").attr('aria-valuenow',index).css('width',((index / files.length) * width))
+                .text('上傳中..'+Math.floor((index / files.length)*100)+"%");
+
+            }
+
             if(index>=files.length){
+                $("#uploadProgress>div").text('上傳成功！');
+                setTimeout(function(){
+                    $("#uploadProgress").hide();
+                },5000);
                 return;
             }
             var image = files[index];
