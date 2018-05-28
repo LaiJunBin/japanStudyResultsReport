@@ -2,7 +2,8 @@
 @section('title',"106金手獎赴日技職研習成果網站")
 @section('header')
     @include('components.navbar')
-    <div class="alert alert-warning" role="alert" style="text-align:center;">拖曳圖片至此頁面可上傳圖片</div>
+    <div class="alert alert-warning" role="alert" style="text-align:center;" id="fileOpen">點我或拖曳圖片至此頁面可上傳圖片</div>
+    <input type="file" multiple id="file" style="display:none;">
 @endsection
 
 
@@ -77,25 +78,16 @@
 </style>
 
 
-
-
-
-
-
-
-
-
-
-
 @section('content')
 <div id="upload">
 	拖曳圖片到這裡將立即上傳圖片
-    
+
 </div>
 <ul class="nav" id="myUl">
 
 </ul>
 <script>
+
 	$(".container")[0].ondragenter = function () {
 		$("#upload").css('opacity',1);
 	}
@@ -109,53 +101,58 @@
 		return false;
 	}
     @if (session()->has('name'))
-
-
+        $("#fileOpen").click(function(){
+            $("#file").click();
+        });
+        $("#file").on('change',function(e){
+            if(e.target.files.length >0)
+                fileUpload(e.target.files);
+        });
         Array.prototype.removeAt = function (key) {
             return this.filter(function (item, index) {
                 return index != key;
             });
         };
 
-        
+
 
         $(".container")[0].ondrop = function (e) {
             e.preventDefault();
             $("#upload").css('opacity',0);
             if(e.dataTransfer.files.length>0){
-                var filereader = new FileReader();
+                fileUpload(e.dataTransfer.files);
+            }
+        }
 
-                for (var image of e.dataTransfer.files) {
-                    if(image.type.indexOf('image')!=-1){
-                        var formdata = new FormData();
-                        formdata.append('images[]', image);
-                        formdata.append('category','{{$category}}');
-                        $.ajax({
-                            url: '{{ url('') }}'+'/ajax/uploadImage.php',
-                            data: formdata,
-                            method: "POST",
-                            dataType: 'JSON',
-                            contentType: false,
-                            processData: false,
-                            success: function (res) {
-                                res.forEach(function(x){
-                                    x.url = x.url.substr(1);
-                                    images.unshift(x);
-                                })
-                                $("#myUl").empty();
-                                page = 1;
-                                render();
-                                document.body.scrollTop=0;
+        function fileUpload(files){
+            for (var image of files) {
+                if(image.type.indexOf('image')!=-1){
+                    var formdata = new FormData();
+                    formdata.append('images[]', image);
+                    formdata.append('category','{{$category}}');
+                    $.ajax({
+                        url: '{{ url('') }}'+'/ajax/uploadImage.php',
+                        data: formdata,
+                        method: "POST",
+                        dataType: 'JSON',
+                        contentType: false,
+                        processData: false,
+                        success: function (res) {
+                            res.forEach(function(x){
+                                x.url = x.url.substr(1);
+                                images.unshift(x);
+                            })
+                            $("#myUl").empty();
+                            page = 1;
+                            render();
+                            document.body.scrollTop=0;
 
-                            },
-                            error:function(err){
-                                alert('圖片上傳失敗，圖片名稱'+image.name);
-                            }
-                        });
-                    }
+                        },
+                        error:function(err){
+                            alert('圖片上傳失敗，圖片名稱'+image.name);
+                        }
+                    });
                 }
-
-
             }
         }
 	@else
@@ -164,7 +161,11 @@
 			$("#upload").css('opacity',0);
 			alert('請先登入!');
 			location.href = `{{ url('login') }}`;
-		}
+        }
+        $("#fileOpen").click(function(){
+            alert('請先登入!');
+			location.href = `{{ url('login') }}`;
+        });
     @endif
         //取得目標
         var ul = document.querySelector('#myUl');
