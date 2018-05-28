@@ -11,6 +11,7 @@
         function layout(){
             var index = $("#slideShow img.active").index();
             var width = $('#slideShow img').width();
+            $("#slideShow img,#slideShow").height($(".container").width()*0.48);
             for(var i = 0 ; i<$("#slideShow img").length ;i++){
                 var n = Math.abs(i-index);
                 $("#slideShow img").eq(i).css('left',width * n + 'px');
