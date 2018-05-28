@@ -88,11 +88,26 @@
 
 
 @section('content')
-<div id="upload">拖曳圖片到這裡將立即上傳圖片</div>
+<div id="upload">
+	拖曳圖片到這裡將立即上傳圖片
+    
+</div>
 <ul class="nav" id="myUl">
 
 </ul>
 <script>
+	$(".container")[0].ondragenter = function () {
+		$("#upload").css('opacity',1);
+	}
+
+	$(".container").bind('dragleave dragend',function () {
+		$("#upload").css('opacity',0);
+	});
+
+	$(".container")[0].ondragover = function () {
+		$("#upload").css('opacity',1);
+		return false;
+	}
     @if (session()->has('name'))
 
 
@@ -102,18 +117,7 @@
             });
         };
 
-        $(".container")[0].ondragenter = function () {
-            $("#upload").css('opacity',1);
-        }
-
-        $(".container").bind('dragleave dragend',function () {
-            $("#upload").css('opacity',0);
-        });
-
-        $(".container")[0].ondragover = function () {
-            $("#upload").css('opacity',1);
-            return false;
-        }
+        
 
         $(".container")[0].ondrop = function (e) {
             e.preventDefault();
@@ -154,6 +158,13 @@
 
             }
         }
+	@else
+		$(".container")[0].ondrop = function (e) {
+			e.preventDefault();
+			$("#upload").css('opacity',0);
+			alert('請先登入!');
+			location.href = `{{ url('login') }}`;
+		}
     @endif
         //取得目標
         var ul = document.querySelector('#myUl');
