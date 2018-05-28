@@ -124,37 +124,40 @@
             }
         }
 
-        function fileUpload(files){
-            for (var image of files) {
-                if(image.type.indexOf('image')!=-1){
-                    var formdata = new FormData();
-                    formdata.append('images[]', image);
-                    formdata.append('category','{{$category}}');
-                    $.ajax({
-                        url: '{{ url('') }}'+'/ajax/uploadImage.php',
-                        data: formdata,
-                        method: "POST",
-                        dataType: 'JSON',
-                        contentType: false,
-                        processData: false,
-                        success: function (res) {
-                            res.forEach(function(x){
-                                x.url = x.url.substr(1);
-                                images.unshift(x);
-                            })
-                            $("#myUl").empty();
-                            page = 1;
-                            render();
-                            document.body.scrollTop=0;
-
-                        },
-                        error:function(err){
-                            alert('圖片上傳失敗，圖片名稱'+image.name);
-                        }
-                    });
-                }
+        function fileUpload(files,index=0){
+            if(index>=files.length){
+                return;
+            }
+            var image = files[index];
+            if(image.type.indexOf('image')!=-1){
+                var formdata = new FormData();
+                formdata.append('images[]', image);
+                formdata.append('category','{{$category}}');
+                $.ajax({
+                    url: '{{ url('') }}'+'/ajax/uploadImage.php',
+                    data: formdata,
+                    method: "POST",
+                    dataType: 'JSON',
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        res.forEach(function(x){
+                            x.url = x.url.substr(1);
+                            images.unshift(x);
+                        })
+                        $("#myUl").empty();
+                        page = 1;
+                        render();
+                        document.body.scrollTop=0;
+                        fileUpload(files,index+1);
+                    },
+                    error:function(err){
+                        alert('圖片上傳失敗，圖片名稱'+image.name);
+                    }
+                });
             }
         }
+
 	@else
 		$(".container")[0].ondrop = function (e) {
 			e.preventDefault();
