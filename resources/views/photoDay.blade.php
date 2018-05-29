@@ -109,7 +109,8 @@
 	$(".container")[0].ondragover = function () {
 		$("#upload").css('opacity',1);
 		return false;
-	}
+    }
+
     @if (session()->has('name'))
         $("#fileOpen").click(function(){
             $("#file").click();
@@ -117,6 +118,7 @@
         $("#file").on('change',function(e){
             if(e.target.files.length >0)
                 fileUpload(e.target.files);
+
         });
         Array.prototype.removeAt = function (key) {
             return this.filter(function (item, index) {
@@ -137,6 +139,7 @@
         function fileUpload(files,index=0){
             if(index == 0){
                 $("#uploadProgress>div").attr('aria-valuemax',files.length).parent().show();
+                $("#uploadProgress>div").attr('aria-valuenow',0).css('width',0);
             }else{
                 var width = $("#uploadProgress").width();
                 $("#uploadProgress>div").attr('aria-valuenow',index).css('width',((index / files.length) * width))
@@ -146,9 +149,8 @@
 
             if(index>=files.length){
                 $("#uploadProgress>div").text('上傳成功！');
-                setTimeout(function(){
-                    $("#uploadProgress").hide();
-                },5000);
+                $("#file").val('');
+
                 return;
             }
             var image = files[index];
