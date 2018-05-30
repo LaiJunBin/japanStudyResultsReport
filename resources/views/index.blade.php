@@ -16,6 +16,11 @@
         }
 
     </style>
+    <script>
+        var isChrome = !!window.chrome && !!window.chrome.webstore;
+        if(!isChrome)
+            alert('建議使用Chrome瀏覽器瀏覽');
+    </script>
 @endsection
 
 @section('footer')
