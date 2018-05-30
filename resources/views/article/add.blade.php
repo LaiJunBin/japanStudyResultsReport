@@ -18,8 +18,11 @@
         <div>
             <label for="selectCategory">選擇文章分類：</label>
             <select name="category" id="selectCategory" class="form-control">
+
                 @forelse ($categories as $category)
-                    <option value="{{$category}}">{{$category}}</option>
+                    @foreach ($category as $value)
+                        <option value="{{$value}}">{{$value}}</option>
+                    @endforeach
                 @empty
                     <option selected>沒有分類</option>
                 @endforelse

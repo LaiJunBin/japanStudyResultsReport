@@ -1,7 +1,7 @@
 <article>
     @if (session()->has('name'))
         <header>
-            <a href="{{url('/article/add')}}" class="btn btn-info fill">新增文章</a>
+            <a href="{{url('/article/add')}}" class="btn btn-info fill" id="addArticleBtn">新增文章</a>
         </header>
     @endif
     <main>
@@ -49,5 +49,12 @@
     }
     #pagination{
         text-align:center;
+    }
+
+    #addArticleBtn{
+        font-size:1vw !important;
+        line-height: 36px !important;
+        height:36px !important;
+        padding:0 !important;
     }
 </style>

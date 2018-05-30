@@ -53,22 +53,21 @@ class BindingService
             ]],
         ];
         $index = count($binding['dropMenu'])-1;
-        $binding['categories'] = Article::whereNotIn('category',$fileTitle)->get()->pluck('category')->unique()->toarray();
+        $binding['categories'] = [];
         // dd($binding,$fileTitle);
         foreach(glob('./images/category/*') as $directory){
             $dir = array_reverse(explode('/',$directory))[0];
             array_push($binding['dropMenu'][$index]['subMenu'],['title'=>$fileTitle[$dir]['title'],'subMenu'=>[]]);
-
+            $binding['categories'][$fileTitle[$dir]['title']] = [];
             foreach(glob('./images/category/'.$dir.'/*') as $file){
                 $current = array_reverse(explode('/',$file))[0];
                 $data = $fileTitle[$dir]['subMenu'][$current];
                 $last = count($binding['dropMenu'][$index]['subMenu'])-1;
                 array_push($binding['dropMenu'][$index]['subMenu'][$last]['subMenu'],['url'=>url('/photo/category/'.$dir.'/'.$current),'title'=>$data]);
-                array_unshift($binding['categories'],$data);
+                array_unshift($binding['categories'][$fileTitle[$dir]['title']],$data);
             }
-
-            array_unshift($binding['categories'],$fileTitle[$dir]['title']);
         }
+        $binding['categories']['自定義分類'] = Article::whereNotIn('category',$fileTitle)->get()->pluck('category')->unique()->toarray();
         return $binding;
     }
 }
