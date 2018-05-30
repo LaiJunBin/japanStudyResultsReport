@@ -34,6 +34,16 @@
                     $(`.dropLi[va=${index}]`).slideDown();
                 }
             });
+            function layout(){
+                $(".categoryLi").each(function(){
+                    var length = $(this).find('button').text().length;
+                    $(this).css('font-size',Math.min(13/length,1.08) + 'em');
+                })
+            }
+            $(window).resize(function(){
+                layout();
+            });
+            layout();
         </script>
     </form>
 </aside>
@@ -49,7 +59,6 @@
     .categoryLi{
         padding:0;
         height:34px;
-        font-size:1vw !important;
     }
 
     .defaultBtn.active{

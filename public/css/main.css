@@ -24,7 +24,6 @@ aside>header {
 
 aside li {
     background: #eee;
-    font-size: 16px !important;
 }
 
 article {
@@ -76,5 +75,9 @@ nav {
     aside {
         display: none;
         margin: 0;
+    }
+
+    aside li{
+        font-size:1.08em !important;
     }
 }
