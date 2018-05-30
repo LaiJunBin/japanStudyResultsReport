@@ -10,11 +10,7 @@
             <a href="{{url('/')}}" class="brand navbar-brand" style="font-size:16px;">106金手獎赴日技職研習成果網站</a>
         </div>
         <div class="collapse navbar-collapse" id="topMenu">
-            <ul class="nav navbar-nav navbar-@yield('navbarAlign','right')">
-                @foreach ($navMenu as $menu)
-                <li><a class="btn btn-sm" href="{{$menu['url']}}">{{$menu['title']}}</a></li>
-                @endforeach
-            </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 @foreach ($dropMenu as $menu)
                 <li class="dropdown">
@@ -28,7 +24,11 @@
                 @endforeach
 
             </ul>
-
+            <ul class="nav navbar-nav navbar-@yield('navbarAlign','right')">
+                @foreach ($navMenu as $menu)
+                <li><a class="btn btn-sm" href="{{$menu['url']}}">{{$menu['title']}}</a></li>
+                @endforeach
+            </ul>
         </div>
     </div>
     <script>
