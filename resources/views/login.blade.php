@@ -19,7 +19,7 @@
             border: 1px solid #333;
         }
 
-        .active {
+        td.active {
             background: #39f;
         }
     </style>

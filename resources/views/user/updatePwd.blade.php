@@ -19,9 +19,6 @@
             border: 1px solid #333;
         }
 
-        .active {
-            background: #39f;
-        }
     </style>
     <h2>修改密碼</h2>
     @include('components.validatorErrorMessage')
