@@ -1,4 +1,4 @@
-{{-- {{dd($navMenu)}} --}}
+{{--  {{dd($dropMenu)}}  --}}
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -20,13 +20,9 @@
                 <li class="dropdown">
                     <a class="btn btn-sm" href="#" data-toggle="dropdown">
                             {{$menu['title']}}
-                        </a>
+                    </a>
                     <ul class="dropdown-menu">
-                        @foreach ($menu['subMenu'] as $subMenu) @if ($subMenu == 'divider')
-                        <li class="divider"></li>
-                        @else
-                        <li><a class="btn btn-sm" href="{{$subMenu['url']}}">{{$subMenu['title']}}</a></li>
-                        @endif @endforeach
+                        @include('components.dropMenu',$menu)
                     </ul>
                 </li>
                 @endforeach
@@ -35,4 +31,21 @@
 
         </div>
     </div>
+    <script>
+        $(".dropdown>.dropdown-menu>.dropdown>a[href='#']").click(function(){
+            $(this).parent().toggleClass('active');
+            $(".dropdown>.dropdown-menu>.dropdown>.dropdown-menu").hide();
+            if($(this).parent().hasClass('active')){
+                $(".dropdown>.dropdown-menu>.dropdown").removeClass('active');
+                $(this).parent().addClass('active');
+                $(this).parent().find(".dropdown-menu").show();
+            }
+            return false;
+        });
+
+        $("a[data-toggle=dropdown]").click(function(){
+            var display = $(this).attr('aria-expanded')?'':'none';
+            $(".dropdown>.dropdown-menu>.dropdown>.dropdown-menu").css('display',display);
+        });
+    </script>
 </nav>

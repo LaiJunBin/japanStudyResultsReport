@@ -28,22 +28,47 @@ class BindingService
         }
         array_push($binding['dropMenu'],['title'=>'相片瀏覽','subMenu'=>[]]);
         $fileTitle = [
-            'culture'=>'日本文化體驗',
-            'University'=>'大學及農業試驗所參訪見學',
-            'communicate'=>'日本高校交流',
-            'enterprise'=>'企業參訪見學',
-            'farmhouse'=>'農家寄宿體驗',
+            'culture'=>['title'=>'日本文化體驗','subMenu'=>[
+                'Tomioka' => '世界文化遺產 富岡製絲廠見學',
+                'EdoTokyoMuseum'=>'江戶東京博物館見學',
+                'KusatsuOnsen'=>'草津溫泉'
+            ]],
+            'University'=>['title'=>'大學及農業試驗所參訪見學','subMenu'=>[
+                'ElectronicSchool'=>'日本電子專門學校體驗學習',
+                'LaPorte'=>'法式餐廳(LA PORTE)實習',
+                'BridalSchool'=>'三幸學園千葉BEAUTY & BRIDAL專門學校',
+            ]],
+            'communicate'=>['title'=>'日本高校交流','subMenu'=>[
+                'agricultural'=>'更級農業高校',
+                'Odawara'=>'小田原東高校',
+            ]],
+            'enterprise'=>['title'=>'企業參訪見學','subMenu'=>[
+                'DesignExhibition'=>'東京國際商業設計展',
+                'JTBGMT'=>'JTB-GMT參訪',
+                'soySauce'=>'弓削醬油工廠見學',
+                'fancl'=>'FANCL工廠見學',
+            ]],
+            'farmhouse'=>['title'=>'農家寄宿體驗','subMenu'=>[
+                'HomeStay'=>'長野縣青木村寄宿'
+            ]],
         ];
         $index = count($binding['dropMenu'])-1;
         $binding['categories'] = Article::whereNotIn('category',$fileTitle)->get()->pluck('category')->unique()->toarray();
-        // dd($binding);
-        foreach(glob('./images/category/*') as $dir){
-            $file = array_reverse(explode('/',$dir))[0];
-            array_push($binding['dropMenu'][$index]['subMenu'],['url'=>url('/photo/category/'.$file),'title'=>$fileTitle[$file]]);
-            array_unshift($binding['categories'],$fileTitle[$file]);
+        // dd($binding,$fileTitle);
+        foreach(glob('./images/category/*') as $directory){
+            $dir = array_reverse(explode('/',$directory))[0];
+            array_push($binding['dropMenu'][$index]['subMenu'],['title'=>$fileTitle[$dir]['title'],'subMenu'=>[]]);
+
+            foreach(glob('./images/category/'.$dir.'/*') as $file){
+                $current = array_reverse(explode('/',$file))[0];
+                $data = $fileTitle[$dir]['subMenu'][$current];
+                $last = count($binding['dropMenu'][$index]['subMenu'])-1;
+                array_push($binding['dropMenu'][$index]['subMenu'][$last]['subMenu'],['url'=>url('/photo/category/'.$dir.'/'.$current),'title'=>$data]);
+                array_unshift($binding['categories'],$data);
+            }
+
+            array_unshift($binding['categories'],$fileTitle[$dir]['title']);
         }
-
-
         return $binding;
     }
 }

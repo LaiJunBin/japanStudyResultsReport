@@ -45,6 +45,10 @@ article {
     margin-bottom: 10px;
 }
 
+.categoryLi{
+    font-size:1vw !important;
+}
+
 #slideShow {
     position: relative;
     width: 100%;

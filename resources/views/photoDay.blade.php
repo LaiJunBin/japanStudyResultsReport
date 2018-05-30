@@ -158,6 +158,7 @@
                 var formdata = new FormData();
                 formdata.append('images[]', image);
                 formdata.append('category','{{$category}}');
+                formdata.append('file','{{$file}}');
                 $.ajax({
                     url: '{{ url('') }}'+'/ajax/uploadImage.php',
                     data: formdata,

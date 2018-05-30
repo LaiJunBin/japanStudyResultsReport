@@ -35,6 +35,6 @@ Route::group(['prefix'=>'/article','middleware'=>['user.auth']],function(){
 
 });
 
-Route::get('/photo/category/{category}','MainController@photo_category');
+Route::get('/photo/category/{category}/{file}','MainController@photo_category');
 Route::get('/{id}','ArticleController@viewArticle');
 
