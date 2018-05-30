@@ -33,12 +33,12 @@
     </div>
     <script>
         $(".dropdown>.dropdown-menu>.dropdown>a[href='#']").click(function(){
-            $(this).parent().toggleClass('active');
-            $(".dropdown>.dropdown-menu>.dropdown>.dropdown-menu").hide();
+            $(this).parent().toggleClass('active').find('ul').css('background','wheat');
+            $(".dropdown>.dropdown-menu>.dropdown>.dropdown-menu").slideUp(150);
             if($(this).parent().hasClass('active')){
                 $(".dropdown>.dropdown-menu>.dropdown").removeClass('active');
                 $(this).parent().addClass('active');
-                $(this).parent().find(".dropdown-menu").show();
+                $(this).parent().find(".dropdown-menu").slideDown(150);
             }
             return false;
         });
@@ -49,4 +49,9 @@
             $(".dropdown>.dropdown-menu>.dropdown").removeClass('active');
         });
     </script>
+    <style>
+        .dropdown.active>ul{
+            background: wheat;
+        }
+    </style>
 </nav>
