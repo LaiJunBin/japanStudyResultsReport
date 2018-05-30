@@ -46,6 +46,7 @@
         $("a[data-toggle=dropdown]").click(function(){
             var display = $(this).attr('aria-expanded')?'':'none';
             $(".dropdown>.dropdown-menu>.dropdown>.dropdown-menu").css('display',display);
+            $(".dropdown>.dropdown-menu>.dropdown").removeClass('active');
         });
     </script>
 </nav>
