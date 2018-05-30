@@ -215,12 +215,34 @@
             fullImage();
         }
 
-        function fullImage() {
-            $("#upload").css({
-                width:$(".container").width()+'px',
-                height:$(".container").height() - $(".container>header").height() - Math.min(document.body.scrollTop,$(".container>header").height()) +'px',
-                top: $(".container>header").height() - Math.min(document.body.scrollTop,$(".container>header").height())+'px',
+        function updateUploadPosition(height){
+            setTimeout(function(){
+                var currentHeight = $(".container>header").height();
+                $("#upload").css({
+                    width:$(".container").width()+'px',
+                    height:$(".container").height() - $(".container>header").height() - Math.min(document.body.scrollTop,$(".container>header").height()) +'px',
+                    top: $(".container>header").height() - Math.min(document.body.scrollTop,$(".container>header").height())+'px',
+                });
+                if(currentHeight == height)
+                    return;
+                updateUploadPosition($(".container>header").height());
+            },25)
+
+        }
+
+        $(".dropdown *,.navbar-toggle").click(function(){
+            updateUploadPosition($(".container>header").height());
+        })
+
+        $(".dropdown").click(function(){
+            $("body").off('click');
+            $('body').click(function(){
+                updateUploadPosition($(".container>header").height());
             });
+        });
+
+        function fullImage() {
+            updateUploadPosition($(".container>header").height());
             var li = document.querySelectorAll('#myUl li');
             for (var i = 0; i < li.length; i++) {
                 $(li[i]).height($(li[i].children[0]).data('height'));
