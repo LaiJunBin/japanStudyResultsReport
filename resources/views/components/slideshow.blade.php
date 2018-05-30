@@ -4,7 +4,8 @@
 
 </div>
 <script>
-    $("#slideShow img").first().addClass('active');
+    (function(){
+        $("#slideShow img").first().addClass('active');
         $(window).resize(function(){
             layout()
         });
@@ -45,5 +46,7 @@
         },5000);
 
         layout();
+    })()
+
 
 </script>

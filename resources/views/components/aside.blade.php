@@ -23,27 +23,30 @@
         <li class="btn fill categoryLi">沒有任何類別</li>
         @endforelse
         <script>
-            $(".dropBtn").click(function(){
-                var index = $(this).data('id');
-                $(".dropLi").slideUp();
-                if($(this).hasClass('active')){
-                    $('.dropBtn').removeClass('active');
-                }else{
-                    $('.dropBtn').removeClass('active');
-                    $(this).addClass('active');
-                    $(`.dropLi[va=${index}]`).slideDown();
+            (function(){
+                $(".dropBtn").click(function(){
+                    var index = $(this).data('id');
+                    $(".dropLi").slideUp();
+                    if($(this).hasClass('active')){
+                        $('.dropBtn').removeClass('active');
+                    }else{
+                        $('.dropBtn').removeClass('active');
+                        $(this).addClass('active');
+                        $(`.dropLi[va=${index}]`).slideDown();
+                    }
+                });
+                function layout(){
+                    $(".categoryLi").each(function(){
+                        var length = $(this).find('button').text().length;
+                        $(this).css('font-size',Math.min(13/length,1.08) + 'em');
+                    })
                 }
-            });
-            function layout(){
-                $(".categoryLi").each(function(){
-                    var length = $(this).find('button').text().length;
-                    $(this).css('font-size',Math.min(13/length,1.08) + 'em');
-                })
-            }
-            $(window).resize(function(){
+                $(window).resize(function(){
+                    layout();
+                });
                 layout();
-            });
-            layout();
+            })()
+
         </script>
     </form>
 </aside>
