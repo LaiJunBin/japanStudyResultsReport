@@ -18,8 +18,11 @@
     </style>
     <script>
         var isChrome = !!window.chrome && !!window.chrome.webstore;
-        if(!isChrome)
+        if(!isChrome && sessionStorage.chrome == undefined){
+            sessionStorage.chrome = true;
             alert('建議使用Chrome瀏覽器瀏覽');
+        }
+        console.log(document.cookie);
     </script>
 @endsection
 
