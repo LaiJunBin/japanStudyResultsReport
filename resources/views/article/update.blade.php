@@ -9,25 +9,33 @@
 <h2>
     編輯文章
 </h2>
+
+
 <a href="{{url('/'.$article['id'])}}" class="btn btn-default">
+
     <span class="glyphicon glyphicon-arrow-left"></span>
     回文章</a>
     @include('components.validatorErrorMessage')
+
 <form action="{{url('/article/update/'.$article['id'])}}" method="post">
-    {{csrf_field()}}
-    {{method_field('put')}}
+
+    {{csrf_field()}} {{method_field('put')}}
     <label for="title">請輸入標題：</label>
-    <input name="title" id="title" type="text" class="form-control" placeholder="請輸入標題" value="{{old('title')??$article['title']}}" required>
+    <input name="title" id="title" type="text" class="form-control" placeholder="請輸入標題" value="{{old('title')??$article['title']}}"
+        required>
     <button type="button" class="btn btn-default active categoryBtn" data-id="0">選擇類別</button>
+
     <button type="button" class="btn btn-default categoryBtn" data-id="1">新增類別</button>
     <div id="category">
         <div>
+
             <label for="selectCategory">選擇文章分類：</label>
             <select name="category" id="selectCategory" class="form-control">
+
                 @forelse ($categories as $category)
-                    <option value="{{$category}}" @if ($article['category'] == $category)
-                        selected
-                    @endif>{{$category}}</option>
+                    @foreach ($category as $value)
+                        <option value="{{$value}}">{{$value}}</option>
+                    @endforeach
                 @empty
                     <option selected>沒有分類</option>
                 @endforelse
@@ -40,7 +48,6 @@
                 disabled required>
         </div>
     </div>
-
 
     <label for="content">內文：</label>
     <textarea name="content" id="content"></textarea>
@@ -68,7 +75,6 @@
                     return;
                 }
             },1);
-
     </script>
 @endsection
 
@@ -76,8 +82,9 @@
     @include('../components.footer')
 @endsection
 
-<style>
-    form * {
-        margin: 3px 0 !important;
-    }
-</style>
+
+    <style>
+        form * {
+            margin: 3px 0 !important;
+        }
+    </style>
