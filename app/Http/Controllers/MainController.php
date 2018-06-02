@@ -15,7 +15,7 @@ class MainController extends Controller
             session()->forget('search');
         $binding = BindingService::binding();
         $binding['images'] = glob('./images/slideShow/*.jpg');
-        $binding['articles'] = Article::paginate(5);
+        $binding['articles'] = Article::orderBy('id','desc')->paginate(5);
         //dd($binding);
         return view('index',$binding);
     }
@@ -64,7 +64,7 @@ class MainController extends Controller
     function search(){
         $binding = BindingService::binding();
         $binding['images'] = glob('./images/slideShow/*.jpg');
-        $binding['articles'] = Article::where('category',session('search'))->paginate(5);
+        $binding['articles'] = Article::where('category',session('search'))->orderBy('id','desc')->paginate(5);
         return view('index',$binding);
     }
 }
