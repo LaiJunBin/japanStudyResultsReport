@@ -1,3 +1,7 @@
+body *{
+    word-break: break-all !important;
+}
+
 footer {
     text-align: center;
     margin-top: 5px;
@@ -44,7 +48,6 @@ article {
     margin-bottom: 10px;
 }
 
-
 #slideShow {
     position: relative;
     width: 100%;
@@ -76,8 +79,7 @@ nav {
         display: none;
         margin: 0;
     }
-
-    aside li{
-        font-size:1.08em !important;
+    aside li {
+        font-size: 1.08em !important;
     }
 }
