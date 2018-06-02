@@ -67,7 +67,13 @@ class BindingService
                 array_unshift($binding['categories'][$fileTitle[$dir]['title']],$data);
             }
         }
-        $binding['categories']['自定義分類'] = Article::whereNotIn('category',$fileTitle)->get()->pluck('category')->unique()->toarray();
+        $alreadyCategory = [];
+        foreach(array_pluck(array_values($fileTitle),'subMenu') as $values){
+            foreach(array_values($values) as $value)
+                array_push($alreadyCategory,$value);
+        }
+        $binding['categories']['自定義分類'] = Article::whereNotIn('category',$alreadyCategory)->get()->pluck('category')->unique()->toarray();
+
         return $binding;
     }
 }
