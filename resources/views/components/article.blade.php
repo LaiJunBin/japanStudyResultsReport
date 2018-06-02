@@ -52,7 +52,7 @@
     }
 
     #addArticleBtn{
-        font-size:1vw !important;
+        font-size:1.08em !important;
         line-height: 36px !important;
         height:36px !important;
         padding:0 !important;
