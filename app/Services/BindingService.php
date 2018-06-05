@@ -66,6 +66,7 @@ class BindingService
                 $last = count($binding['dropMenu'][$index]['subMenu'])-1;
                 array_push($binding['dropMenu'][$index]['subMenu'][$last]['subMenu'],['url'=>url('/photo/category/'.$dir.'/'.$current),'title'=>$data]);
                 array_unshift($binding['categories'][$fileTitle[$dir]['title']],$data);
+                $binding['categoriesImagesCounts'][$data] = count(glob($file.'/*'));
             }
         }
         $alreadyCategory = [];
@@ -75,11 +76,10 @@ class BindingService
         }
         $otherCategory = Article::whereNotIn('category',$alreadyCategory)->get()->pluck('category')->unique()->toarray();
         $binding['categories']['自定義分類'] = $otherCategory;
-        $binding['categoriesCounts'] = [];
         foreach(array_merge($alreadyCategory,$otherCategory) as $category){
             $binding['categoriesArticlesCounts'][$category] = Article::orWhere('category',$category)->count();
         }
-
+        // dd($binding);
         return $binding;
     }
 }

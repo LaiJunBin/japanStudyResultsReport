@@ -52,6 +52,16 @@
     <style>
         .dropdown.active>ul{
             background: wheat;
+            box-sizing:border-box;
+        }
+        .dropdown>.dropdown-menu>.dropdown>.dropdown-menu li{
+            position: relative;
+            padding-right:10px;
+        }
+        .dropdown>.dropdown-menu>.dropdown>.dropdown-menu li>.badge{
+            position: absolute;
+            right:0;
+            top:10%;
         }
     </style>
 </nav>
