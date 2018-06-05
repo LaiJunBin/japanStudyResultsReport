@@ -73,7 +73,12 @@ class BindingService
             foreach(array_values($values) as $value)
                 array_push($alreadyCategory,$value);
         }
-        $binding['categories']['自定義分類'] = Article::whereNotIn('category',$alreadyCategory)->get()->pluck('category')->unique()->toarray();
+        $otherCategory = Article::whereNotIn('category',$alreadyCategory)->get()->pluck('category')->unique()->toarray();
+        $binding['categories']['自定義分類'] = $otherCategory;
+        $binding['categoriesCounts'] = [];
+        foreach(array_merge($alreadyCategory,$otherCategory) as $category){
+            $binding['categoriesArticlesCounts'][$category] = Article::orWhere('category',$category)->count();
+        }
 
         return $binding;
     }

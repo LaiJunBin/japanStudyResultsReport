@@ -1,3 +1,4 @@
+
 <aside>
     <header>
         <b>文章分類：</b>
@@ -6,21 +7,23 @@
     <form action="{{url('/search')}}" method="post">
         {{csrf_field()}}
         @forelse ($categories as $category => $values)
-        {{--  {{dd($category,$value)}}  --}}
-        <li class="btn fill categoryLi">
-            <button class="defaultBtn dropBtn" data-id="{{$loop->index}}" type="button">{{$category}}</button>
-        </li>
-        @foreach ($values as $item)
-            <li class="btn fill categoryLi dropLi" va="{{$loop->parent->index}}">
-                <button class="defaultBtn " type="submit" name="search" value="{{$item}}">{{$item}}</button>
+            {{--  {{dd($category,$values)}}  --}}
+            <li class="btn fill categoryLi">
+                <button class="defaultBtn dropBtn" data-id="{{$loop->index}}" type="button">{{$category}}</button>
             </li>
-        @endforeach
-        @if ($loop->last)
-        <li class="btn fill categoryLi">
-            <a class="defaultBtn" href="{{url('/')}}">全部一覽</a>
-        </li>
-        @endif @empty
-        <li class="btn fill categoryLi">沒有任何類別</li>
+            @foreach ($values as $item)
+                <li class="btn fill categoryLi dropLi" va="{{$loop->parent->index}}">
+                    <button class="defaultBtn " type="submit" name="search" value="{{$item}}">{{$item}}</button>
+                    <span class="badge">{{$categoriesArticlesCounts[$item]}}</span>
+                </li>
+            @endforeach
+            @if ($loop->last)
+                <li class="btn fill categoryLi">
+                    <a class="defaultBtn" href="{{url('/')}}">全部一覽</a>
+                </li>
+            @endif 
+        @empty
+            <li class="btn fill categoryLi">沒有任何類別</li>
         @endforelse
         <script>
             (function(){
@@ -53,6 +56,7 @@
 
 <style>
     .dropLi{
+        position: relative;
         display:none;
         list-style:none;
         background-image: linear-gradient(to bottom,#5bc0de 0,#2aabd2 100%);
@@ -84,5 +88,10 @@
 
     a.defaultBtn{
         color:#333 !important;
+    }
+    .categoryLi>.badge{
+        position: absolute;
+        right:0;
+        top:25%;
     }
 </style>
