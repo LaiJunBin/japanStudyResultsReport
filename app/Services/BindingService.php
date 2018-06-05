@@ -33,7 +33,8 @@ class BindingService
                 'EdoTokyoMuseum'=>'江戶東京博物館見學',
                 'KusatsuOnsen'=>'草津溫泉'
             ]],
-            'University'=>['title'=>'大學及農業試驗所參訪見學','subMenu'=>[
+            'University'=>['title'=>'專門學校及實習場域體驗學習','subMenu'=>[
+				'Agricultural'=>'農業大學校、農業試驗所參訪見學',
                 'ElectronicSchool'=>'日本電子專門學校體驗學習',
                 'LaPorte'=>'法式餐廳(LA PORTE)實習',
                 'BridalSchool'=>'三幸學園千葉BEAUTY & BRIDAL專門學校',
