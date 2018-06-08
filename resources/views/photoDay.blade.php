@@ -314,14 +314,14 @@
                 //圖片最小的寬度
                 var minWidth = 340;
                 //紀錄高度的陣列
-                var height = [];
+                var height = new Array();
                 var li = document.querySelectorAll('#myUl li');
                 //畫面寬度等於#myUl的寬度
                 var mainWidth = ul.offsetWidth;
                 //每個li的寬度都一樣，所以取第一個就好
                 var liWidth = li[0].offsetWidth;
                 //計算現在的版面一列可以塞下幾張圖
-                var count = Math.floor(mainWidth / minWidth);
+                var count = Math.max(1,Math.floor(mainWidth / minWidth));
                 //之後推算一個li的寬度可以多寬剛好填滿版面，至少不要留白太多(畫面小的情況下)
                 var setLiWidth = Math.floor(mainWidth / count);
                 for (var i = 0; i < li.length; i++) {
@@ -348,6 +348,7 @@
                 if (document.querySelector("#bottom") != null)
                     document.querySelector("#bottom").style.top = Math.max.apply(null, height) + 'px';
             }
+
         }
         var adjust = setInterval(function(){
             var n = 0;
