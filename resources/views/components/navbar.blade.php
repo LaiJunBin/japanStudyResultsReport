@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{{url('/')}}" class="brand navbar-brand" style="font-size:16px;">106金手獎赴日技職研習成果網站</a>
+            <a href="{{url('/')}}" class="brand navbar-brand" style="font-size:16px;font-weight: 900;color: dodgerblue;font-family: arial;">106金手獎赴日技職研習成果網站</a>
         </div>
         <div class="collapse navbar-collapse" id="topMenu">
 

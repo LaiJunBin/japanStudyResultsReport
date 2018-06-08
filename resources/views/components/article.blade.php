@@ -30,7 +30,7 @@
 
 <style>
     .article:nth-child(odd){
-        background: #efefef;
+        background: #5bc0de59;
 
     }
     .article{
