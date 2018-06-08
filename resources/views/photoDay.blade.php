@@ -253,12 +253,12 @@
         function getData() {
             var scrollTop = document.body.scrollTop;
             var scrollTotalHeight = document.body.scrollHeight;
-            var windowHeight = document.body.clientHeight;;
-            if (scrollTotalHeight <= scrollTop + windowHeight) {
+            var windowHeight = document.body.clientHeight;
+            if (scrollTotalHeight <= (scrollTop + windowHeight)*1.1) {
                     render();
                 }
             }
-
+		
         function render(){
             $(".removeIcon").off('click');
             //先調整圖片大小
