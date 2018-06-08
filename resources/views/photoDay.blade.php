@@ -159,6 +159,7 @@
                 formdata.append('images[]', image);
                 formdata.append('category','{{$category}}');
                 formdata.append('file','{{$file}}');
+
                 $.ajax({
                     url: '{{ url('') }}'+'/ajax/uploadImage.php',
                     data: formdata,
@@ -178,10 +179,14 @@
                         fileUpload(files,index+1);
                     },
                     error:function(err){
+						console.log(err);
                         alert('圖片上傳失敗，圖片名稱'+image.name);
                     }
                 });
-            }
+            }else{
+				$("#uploadProgress>div").attr('aria-valuemax',files.length).parent().hide();
+				alert('檔案類型不符合');	
+			}
         }
 
 	@else
