@@ -1,1 +1,1 @@
-Publish in http://food.kpvs.ntpc.edu.tw/japanStudyResultsReport/
+Publish in http://kpdp.kpvs.ntpc.edu.tw/japanStudyResultsReport/
